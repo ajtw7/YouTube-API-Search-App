@@ -16,13 +16,17 @@ xhttp.onreadystatechange = function () {
         videoData.forEach(function (video) {
             console.log(video);
             var videoDiv = document.createElement('div');
+            videoDiv.classList.add('videoDiv')
             videoDiv.innerHTML = `
-                <img src=${video.thumbnails.default.url} >
+                <img src=${video.thumbnails.high.url} >
+                <h3>${video.title}</h3>
+                <p>${video.channelTitle}</p>
+                <p>${new Date(video.publishTime).toLocaleString()}</p>
             `
             contentContainer.appendChild(videoDiv);
 
         })
     }
 };
-xhttp.open("GET", "https://www.googleapis.com/youtube/v3/search?part=snippet&q=triple-jump&key=AIzaSyDvzCwOEp-M31sFovCG9aeJhZgvFb27a8M", true);
+xhttp.open("GET", "https://www.googleapis.com/youtube/v3/search?part=snippet&q=triple-jump&maxResults=12&key=AIzaSyDvzCwOEp-M31sFovCG9aeJhZgvFb27a8M", true);
 xhttp.send();
